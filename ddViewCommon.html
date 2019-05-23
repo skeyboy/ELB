@@ -1,0 +1,467 @@
+
+<div id="div_print" style="margin-left:2px;margin-right:2px;">
+    <table style="width:96%; font-size:10px;">
+        <tr style="height: 76px">
+            <td>
+                <img src="static/adp/images/maintenancemgt/ac_logo.jpg" style="width:20px;height:27px;"/>
+            </td>
+            <td style="width:160px;" align="center">
+                <span style="font-size: 12px;font-weight:900;letter-spacing:1px;">中国国际航空股份有限公司</span><br>
+                <span style="font-size: 12px;font-weight:900;font-style:italic;">AIR CHINA LIMITED</span>
+            </td>
+            <td style="font-size: 24px;font-weight:900;letter-spacing:1px;" align="center">
+				{% if zztype == 'DD' %}
+					保&nbsp;&nbsp;&nbsp;&nbsp;留&nbsp;&nbsp;&nbsp;&nbsp;故&nbsp;&nbsp;&nbsp;&nbsp;障&nbsp;&nbsp;&nbsp;&nbsp;单
+                    (DEFRRED DEFET SHEET)
+				{% elif zztype == 'DHD' %}
+					保&nbsp;&nbsp;&nbsp;&nbsp;留&nbsp;&nbsp;&nbsp;&nbsp;故&nbsp;&nbsp;&nbsp;&nbsp;障&nbsp;&nbsp;&nbsp;&nbsp;
+                    通&nbsp;&nbsp;&nbsp;&nbsp;知&nbsp;&nbsp;&nbsp;&nbsp;单<br>
+                    (NOTIFICATION OF DEFERRED DEFECT)
+                {% else %}
+                {# 这里缺个东东啊 #}
+				{% endif %}
+            </td>
+            <td>
+				{% if ifRii == 1 %}
+					<div style="border:2px solid black;width:40px;height:25px;"
+                     align="center"><strong style="font-weight: bold;">RII</strong>
+					</div>
+				{% endif %}
+            </td>
+        </tr>
+    </table>
+    <div style="border:2px solid black;padding:1px;">
+
+        <table style="width: 100%; font-size:10px;" border="1">
+            <tr>
+                <td height="30" align="center">MB CODE<br>执管基地代码</td>
+                <td colspan="2" align="center" style="min-width:150px;">DD NO.<br/>保留故障编号</td>
+                <td align="center">WO-NO.<br>工作指令号</td>
+                <td align="center">A/C REG<br>飞机号</td>
+                <td  colspan="2" align="center">ENG/APU S/N<br/>发动机/APU 序号</td>
+                <td align="center">TRANSFERRED&nbsp;FROM<br>转录自何文件</td>
+                <td colspan="2" align="center">ISSUE DATE/LOCALITY<br/>首次报告日期/地点</td>
+                <td colspan="2" align="center" style="min-width:150px;">A/C TOTAL FH/CYC<br/>飞机的总飞行小时/循环</td>
+            </tr>
+
+            <tr>
+                <td height="20" align="center" class="modifid-property-mbCode"><span  style="color:blue;"> {{ mbCode }} </span></td>
+                <td colspan="2" align="center" class="modifid-property-ddNum"><span style="color:blue;"> {{ ddNum }} </span></td>
+                <td align="center" class="modifid-property-workNum">
+                    <span style="color:blue;" >
+						{% if workNum %}
+							 {{ workNum }}
+						{% else %}
+							N/A
+						{% endif %}
+                    </span>
+                </td>
+                <td align="center" class="modifid-property-aircraftNo"><span style="color:blue;"> {{ aircraftNo }} </span></td>
+                <td class="modifid-property-engApuSn" colspan="2" align="center">
+                    <span style="color:blue;">
+						{% if engApuSn %}
+							 {{ engApuSn }}
+						{% else %}
+							N/A
+						{% endif %}
+                    </span>
+                </td>
+                <td align="center" class="modifid-property-transferredFrom" data-content-formattor="transferredFromFormattor"  >
+                    <span style="color:blue;" id="transferredFrom"> {{ transferredFrom }} </span></td>
+                <td colspan="2" align="center">
+					    <span style="color:blue;" class="modifid-property-issueDate" data-content-formattor="yyyyMMdd" >
+                             {{ issueDateStr }}
+                        </span>
+                        /<!-- ZZAIRPORT 对应 ISSUE_LOCALITY  vissueLocality -->
+                        <span style="color:blue;" class="modifid-property-issueLocality" > {{ ZZAIRPORT }}
+                        </span>
+                </td>
+                <td colspan="2" align="center">
+                    <span class="modifid-property-flyTotalHours" style="color:blue;">
+						{% if flyTotalHours %}
+							 {{ flyTotalHours }}
+						{% else %}
+							N/A
+						{% endif %}
+                    </span>
+                    /<span class="modifid-property-flyTotalCircles" style="color:blue;">
+						{% if flyTotalCircles %}
+							 {{ flyTotalCircles }}
+						{% else %}
+							N/A
+						{% endif %}
+                    </span>
+                </td>
+            </tr>
+            <tr id="reportAndTempAction_tr">
+                <td height="25" colspan="4" align="center">DD REPORT & TEMP ACT保留报告及临时措施</td>
+                <td class="modifid-property-faultDescriptionList"
+                    data-content-formattor="faultDescriptionFormattor"
+                    colspan="8" align="left" id="reportAndTempAction_1"></td>
+            </tr>
+            <tr >
+                <td  class="modifid-property-reportAndTempAction" height="25" colspan="12" align="left" style="color:blue;" >
+                    <span id="descriptionSapn"> {{ reportAndTempAction }} </span></td>
+            </tr>
+            <tr id="faultCause_tr">
+                <td height="25" colspan="4" align="center">DD FAULT CAUSE 故障原因</td>
+                <td colspan="8" align="left" id="faultCause_1"></td>
+            </tr>
+            <tr> <td colspan="12" class="modifid-property-faultCause"><p style="color:blue;"> {{ faultCause }} </p></td></tr>
+
+            <tr>
+                <td height="25" align="center">NAME<br>名称</td>
+                <td colspan="2" align="center">P/N<br/>件号</td>
+                <td align="center">QUANTITY<br>数量</td>
+                <td align="center">ATA CHAPTER<br>章节号</td>
+                <td colspan="3" align="center">DD CLASSIFICATION<br/>保留故障分类</td>
+
+                <td colspan="2" align="center">SERVICE EFFECT<br/>影响服务程度</td>
+                <td colspan="2" align="center">OPERATION LIMITED<br/>运行限制</td>
+            </tr>
+
+            <tr>
+
+                <td height="60" align="center" class="modifid-property-materialsList" data-content-formattor="toolFormattor">
+					{% if ifEquipment == 0 %}
+						<span style="color:blue;">N/A</span>
+					{% elif ifEquipment == 1 %}
+						{% for materials in materialsList %}
+							<span style="color:blue;"> {{ materials.name }} </span><br>
+						{% endfor %}
+                    {% else %}
+                    {# 此处没有东东，语法需要 #}
+                    
+					{% endif %}
+                </td>
+
+                <td colspan="2" align="left" class="modifid-property-materialsList">
+                    {% if ifEquipment == 0 %}
+						<span style="color:blue;">N/A</span>
+					{% elif ifEquipment == 1 %}
+						{% for materials in materialsList %}
+							<span style="color:blue;"> {{ materials.itemPnr }} </span><br>
+						{% endfor %}
+                    {% else %}
+                        {#  没有东东，语法需要 #}
+					{% endif %}
+                </td>
+
+
+                <td align="center">
+                    <span style="color:blue;">
+                            故障数量：<span class="modifid-property-defaultCount" style="border-bottom:1px solid black;">
+							{% if defaultCount %}
+								 {{ defaultCount  }}
+							{% else %}
+								N/A
+							{% endif %}
+							&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                            放行数量：<span class="modifid-property-releaseCount" style="border-bottom:1px solid black;">
+							{% if releaseCount %}
+								 {{ releaseCount  }}
+							{% else %}
+								N/A
+							{% endif %}
+
+							&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                            安装数量：<span class="modifid-property-installCount" style="border-bottom:1px solid black;">
+							{% if installCount %}
+								 {{ installCount  }}
+							{% else %}
+								N/A
+							{% endif %}
+
+							&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            </span>
+                </td>
+                <td align="center" class="modifid-property-ataChapter"><span style="color:blue;"> {{ ataChapter }} </span></td>
+
+                <td colspan="3" align="left" class="modifid-property-deferDefClassify ZZBLCLF"
+                    data-content-formattor="deferDefClassifyFormatter" >
+                    <span>A</span>
+
+					<input type="checkbox" name="ZZBLCLF" value="A" {% if ZZBLCLF == 'A' %} checked="checked" {% endif %}>
+
+                    <span>B</span><input type="checkbox" name="ZZBLCLF" value="B" {% if ZZBLCLF == 'A' %} checked="checked" {% endif %}>
+                    <span>C</span><input type="checkbox" name="ZZBLCLF" value="C" {% if ZZBLCLF == 'C' %} checked="checked" {% endif %}>
+                    <span>D</span><input type="checkbox" name="ZZBLCLF" value="D" {% if ZZBLCLF == 'D' %} checked="checked" {% endif %}>
+                    <span>I</span><input type="checkbox" name="ZZBLCLF" value="I" {% if ZZBLCLF == 'I' %} checked="checked" {% endif %}>
+                    <span>M</span><input type="checkbox" name="ZZBLCLF" value="M" {% if ZZBLCLF == 'M' %} checked="checked" {% endif %}>
+                    <span>S</span><input type="checkbox" name="ZZBLCLF" value="S" {% if ZZBLCLF == 'S' %} checked="checked" {% endif %}>
+
+                    <span>CBS-F</span><input type="checkbox" name="ZZBLCLF" value="CBS-F" {% if ZZBLCLF == 'CBS-F' %} checked="checked" {% endif %}>
+                    <span>CBS-C</span><input type="checkbox" name="ZZBLCLF" value="CBS-C" {% if ZZBLCLF == 'CBS-C' %} checked="checked" {% endif %}><br>
+                    <span>CBS-Y</span><input type="checkbox" name="ZZBLCLF" value="CBS-Y" {% if ZZBLCLF == 'CBS-Y' %} checked="checked" {% endif %}>
+                    <span>CBS-A</span><input type="checkbox" name="ZZBLCLF" value="CBS-A" {% if ZZBLCLF == 'CBS-A' %} checked="checked" {% endif %}>
+                    <span>CBS-G</span><input type="checkbox" name="ZZBLCLF" value="CBS-G" {% if ZZBLCLF == 'CBS-G' %} checked="checked" {% endif %}>
+
+                    <span>CBL</span><input type="checkbox" name="ZZBLCLF" value="CBL" {% if ZZBLCLF == 'CBL' %} checked="checked" {% endif %}>
+                    <span>CBO</span><input type="checkbox" name="ZZBLCLF" value="CBO" {% if ZZBLCLF == 'CBO' %} checked="checked" {% endif %}>
+                </td>
+                <td colspan="2" align="center" class="modifid-property-serviceEffect"
+                    data-content-formattor="serviceEffectFormattor">
+                    <span style="margin-right:3px;font-size: 12px;">严&nbsp;&nbsp;&nbsp;&nbsp;重</span>
+
+                    {% if serviceEffect == 2 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" checked="checked" id="serviceEffect_serious"
+                           name="serviceEffect" value="2">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" id="serviceEffect_serious"
+                           name="serviceEffect" value="2">
+					{% endif %}
+
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <br>
+                    <span style="margin-right:3px;font-size: 12px;">一&nbsp;&nbsp;&nbsp;&nbsp;般</span>
+
+                    {% if serviceEffect == 1 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" checked="checked" id="serviceEffect_common"
+                           name="serviceEffect" value="1">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" id="serviceEffect_common"
+                           name="serviceEffect" value="1">
+					{% endif %}
+
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <br>
+                    <span style="margin-right:3px;font-size: 12px;">不影响</span>
+
+                    {% if serviceEffect == 0 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" checked="checked" id="serviceEffect_nofeel"
+                           name="serviceEffect" value="0">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                           disabled="disabled" id="serviceEffect_common"
+                           name="serviceEffect" value="0">
+					{% endif %}
+
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                    <br>
+
+
+                </td>
+                <td colspan="2" align="center"  class="modifid-property-olList"
+                    data-content-formattor="olListFormattor">
+                    <span style="margin-right:3px;font-size: 12px;">O项</span>
+
+                    {% if ZZFLGO == 'X' %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" type="checkbox" disabled="disabled" name="ZZFLGO"
+						 checked="checked" value="X">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" type="checkbox" disabled="disabled" name="ZZFLGO"
+						 value="X">
+					{% endif %}
+                    <br>
+                    <span style="border-bottom:1px solid black;min-width: 25px;display: inline-block;" class="modifid-property-operationLimitedOther">
+                     {{ operationLimitedOther }}  &nbsp;
+                    </span>
+                </td>
+            </tr>
+
+            <tr>
+                <td height="30" align="center">REASON CODE<br>保留原因代码</td>
+                <td colspan="2" align="center">TARGET DATE/FH/CYC<br/>计划保留时间/飞行小时/循环</td>
+                <td align="center">REQUIRED<br>GRND TIME<br>所需停场时间</td>
+                <td align="center">MH REQUIRED<br>所需工时</td>
+                <td colspan="2" align="center">REQUIRED M<br/>是否有M项要求</td>
+                <td align="center">REQUIRED ON A/C<br>是否需放入机上“保留<br>故障单夹”</td>
+                <td colspan="2" align="center">PROPOSER/DATE<br/>申请人/日期</td>
+                <td colspan="2" align="center">APPROVED BY/DATE<br/>批准人/日期</td>
+            </tr>
+            <tr>
+                <td height="30" align="center" class="modifid-property-reasonCode">
+                    <span style="color:blue;"> {{ reasonCode }} </span>
+                </td>
+                <td colspan="2" align="center">
+                    {% if deferredRemark %}
+						<span style="color:blue;min-width: 25px;display: inline-block;"
+                                   class="modifid-property-deferredRemark" >&nbsp; {{ deferredRemark }} </span>
+					{% else %}
+						<span style="color:blue;min-width: 25px;display: inline-block;"
+                                  class="modifid-property-targetDate" data-content-formattor="targetDateFormattor">
+						{% if targetDate %}
+							{% if issueDate %}
+								 {{ deferredDaysStr }}
+							{% else %}
+								 {{ targetDate }} 天
+							{% endif %}
+						{% endif %}
+
+						</span><br>
+
+						<span style="color:blue;min-width: 25px;display: inline-block;"
+							  class="modifid-property-deferredFlyHours" >
+						{% if deferredFlyHours %}
+							 {{ deferredFlyHours }} 飞行小时
+						{% endif %}
+
+						</span><br>
+
+						<span style="color:blue;min-width: 25px;display: inline-block;"
+							  class="modifid-property-deferredFlyCircles" >
+								 {{ deferredFlyCircles }} 循环
+						</span>
+								&nbsp;—&nbsp;
+
+						<span style="color:blue;min-width: 25px;display: inline-block;"
+							  class="modifid-property-deferredFlyCirclesEnd" >
+								 {{ deferredFlyCirclesEnd }} 循环
+						</span>
+					{% endif %}
+                </td>
+                <td align="center" class="modifid-property-requiredGrndTime" ><span style="color:blue;"> {{ requiredGrndTime }} </span></td>
+                <td align="center" class="modifid-property-mhRequired"><span style="color:blue;"> {{ mhRequired }} </span></td>
+                <td colspan="2" align="center"  class="modifid-property-isRequiredM"
+                    data-content-formattor="isRequiredMFormattor" >
+                    <span style="margin-right:3px;font-size: 12px;">是</span>
+
+                    {% if isRequiredM == 1 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           checked="checked" name="isRequiredM" value="1">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           name="isRequiredM" value="1">
+					{% endif %}
+
+                    <br>
+                    <span style="margin-right:3px;font-size: 12px;">否</span>
+                    {% if isRequiredM != 1 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           checked="checked" name="isRequiredM" value="1">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           name="isRequiredM" value="0">
+					{% endif %}
+
+
+                </td>
+                <td align="center" class="modifid-property-isRequiredOnAircraft"
+                    data-content-formattor="isRequiredOnAircraftFormattor" >
+                    <span style="margin-right:3px;font-size: 12px;">是</span>
+					{% if isRequiredOnAircraft == 1 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           checked="checked" name="isRequiredM" value="1">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           name="isRequiredM" value="1">
+					{% endif %}
+
+
+                    <br>
+                    <span style="margin-right:3px;font-size: 12px;">否</span>
+					{% if isRequiredOnAircraft != 1 %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           checked="checked" name="isRequiredM" value="0">
+					{% else %}
+						<input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                           name="isRequiredM" value="0">
+					{% endif %}
+
+                </td>
+                <td colspan="2" align="center"><span style="color:blue;"> {{ proposer }} </span>/<span style="color:blue;">
+				 {{ proposeDateStr }} </span>
+				</td>
+                <td colspan="2" align="center"><span style="color:blue;"> {{ approver }} </span>/
+					<span style="color:blue;" id="approvedDate">
+						 {{ approvedDate }}
+					</span>
+				</td>
+            </tr>
+
+            <tr>
+                <td colspan="4" height="25" align="center">
+
+                        <span>
+                            工作安排在
+                        </span>
+                </td>
+                <td colspan="8" class="modifid-property-actionScheduled" data-content-formattor="yyyyMMdd">
+                    <span style="color:blue;" >
+                         {{ actionScheduledStr }}
+                    </span>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td height="25" colspan="3" align="center" class="modifid-property-acList"
+                    data-content-formattor="acListFormattor" >RECTIFICATION处理结果</td>
+                <td colspan="9"  align="left"></td>
+
+            </tr>
+
+            <tr>
+                <td height="30" colspan="2" align="center">MECHANIC/DATE<br>维修人员/日期</td>
+                <td colspan="2" align="center">INSPECTOR/DATE<br/>检验人员/日期</td>
+                <td colspan="2" align="center">YELLOW COPY REM<br>“保留故障单夹”中黄色副页撤除者</td>
+
+                <td colspan="2" rowspan="2" align="left" style="border:none;">
+                    <blockquote style="margin-bottom: 0;">
+                        执管基地代码：<br>
+                        成都：CD&nbsp;&nbsp;&nbsp;&nbsp;天津：TJ<br>
+                        重庆：CQ&nbsp;&nbsp;&nbsp;&nbsp;呼和浩特：HH<br>
+                        杭州：HZ&nbsp;&nbsp;&nbsp;&nbsp;上海：SH<br>
+                        武汉：WH&nbsp;&nbsp;&nbsp;&nbsp;Ameco：AM
+                    </blockquote>
+                </td>
+
+                <td colspan="2" rowspan="2" align="left" style="border:none;width:300px">
+                    <blockquote style="margin-bottom: 0;">
+                        保留原因代码：<br>
+                        观察项目：OI<br>
+                        缺航材：LS<br>
+                        无足够停场时间：SG<br>
+                        需特殊准备：SP<br>
+                    </blockquote>
+                </td>
+                <td colspan="2" rowspan="2" align="left" style="border:none;width:15%;">
+                    <blockquote style="margin-bottom: 0;">
+                        白色原页存入保留故障单卷宗,
+                        黄色副页存入"保留故障单夹",
+                        粉色副页送生产计划部门,
+                        绿色副页送质量部门,
+                        金黄色副页送备料部门.
+                    </blockquote>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td colspan="2" height="30" align="center">
+                    <span style="color:blue;" class="modifid-property-mechanic" > {{ mechanic }} </span>/
+                    <span style="color:blue;" class="modifid-property-mechanicDate"
+                           data-content-formattor="yyyyMMdd" > {{ mechanicDateStr }} </span>
+                </td>
+                <td colspan="2" align="center">
+                    <span style="color:blue;" class="modifid-property-inspector" > {{ inspector }} </span>/
+						<span style="color:blue;" class="modifid-property-inspectorDate" data-content-formattor="yyyyMMdd">
+							 {{ inspectorDateStr }}
+						</span></td>
+
+                </td>
+                <td colspan="2" align="center" class="modifid-property-yellowCopyRem" ><span style="color:blue;"> {{ yellowCopyRem  }} </span></td>
+
+            </tr>
+        </table>
+
+
+    </div>
+    <table style="">
+        <tr>
+            <td>CCA-QM-001R5</td>
+        </tr>
+    </table>
+
+</div>
+
+
+

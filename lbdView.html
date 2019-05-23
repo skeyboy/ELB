@@ -1,0 +1,444 @@
+<div id="div_print" style="margin-left:2px;margin-right:2px;">
+    <table style="width:96%; font-size:10px;">
+        <tr style="height: 76px">
+            <td><br>
+                <img src="static/adp/images/maintenancemgt/ac_logo.jpg" style="width:20px;height:27px;"/>
+            </td>
+            <td style="width:160px;" align="center"><br>
+                <span style="font-size: 12px;font-weight:900;font-style:italic;">AIR CHINA LIMITED</span><br>
+                <span style="font-size: 12px;font-weight:900;letter-spacing:1px;">中国国际航空股份有限公司</span>
+            </td>
+            <td style="font-size: 24px;font-weight:900;letter-spacing:1px;" align="center">
+                (NOTIFICATION OF DEFERRED DEFECT)<br>
+                保&nbsp;&nbsp;&nbsp;&nbsp;留&nbsp;&nbsp;&nbsp;&nbsp;故&nbsp;&nbsp;&nbsp;&nbsp;障&nbsp;&nbsp;&nbsp;&nbsp;
+                通&nbsp;&nbsp;&nbsp;&nbsp;知&nbsp;&nbsp;&nbsp;&nbsp;单
+            </td>
+            <td>
+                {% if ifRii  ==  1 %}
+                <div style="border:2px solid black;width:40px;height:25px;"
+                    align="center"><strong style="font-weight: bold;">RII</strong>
+                </div>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <div style="border:2px solid black;padding:1px;">
+        <table style="width: 100%; font-size:10px;" border="1">
+            <tr>
+                <td align="center" style="min-width:150px;">NO.<br/>编号</td>
+                <td align="center">A/C REG<br>飞机号</td>
+                <td colspan="2" align="center">ISSUE DATE<br/>报告日期</td>
+                <td colspan="2" align="center">ISSUE LOCALITY<br/>报告地点</td>
+                <td colspan="2" align="center">PERSONNEL<br/>保留人员</td>
+                <td align="center">TEL<br/>联系电话</td>
+                <td align="center">FAX<br/>传真</td>
+            </tr>
+            <tr>
+                <td align="center" class="modifid-property-ddNum"><span style="color:blue;">{{ ddNum }} </span></td>
+                <td align="center" class="modifid-property-aircraftNo"><span style="color:blue;">{{ aircraftNo }} </span></td>
+                <td colspan="2" align="center">
+                    <span style="color:blue;" class="modifid-property-issueDate" data-content-formattor="yyyyMMdd" >
+                        {{ issueDateStr }}
+                    </span>
+                </td>
+                <td colspan="2" align="center">
+                    <!-- ZZAIRPORT 对应 ISSUE_LOCALITY  vissueLocality -->
+                    <span style="color:blue;" class="modifid-property-issueLocality" >{{ ZZAIRPORT }} </span>
+                </td>
+                <td colspan="2" align="center" style="color:blue;">{{ proposer }} </td>
+                <td align="center"></td>
+                <td align="center"></td>
+            </tr>
+            <tr id="reportAndTempAction_tr">
+                <td height="25" colspan="4" align="center">REPORT & TEMP ACT保留报告及临时措施</td>
+                    <td class="modifid-property-faultDescriptionList"
+                    data-content-formattor="faultDescriptionFormattor"
+                    colspan="6" align="left" id="reportAndTempAction_1"></td>
+                    </tr>
+                    <!-- 85 start -->
+                    <tr >
+                    <td  class="modifid-property-reportAndTempAction" height="30" colspan="10" align="left" style="color:blue;" >
+                    <span id="descriptionSapn">{{ reportAndTempAction }} </span>
+                </td>
+            </tr>
+            
+            <tr>
+                <td align="center">NAME<br>名称</td>
+                <td align="center">P/N<br/>件号</td>
+                <td colspan="2" align="center">QUANTITY<br>数量</td>
+                <td colspan="2" align="center">ATA CHAPTER<br>章节号</td>
+                <td colspan="2" align="center">DD CLASSIFICATION<br/>保留故障分类</td>
+                <td align="center">SERVICE EFFECT<br/>影响服务程度</td>
+                <td align="center">OPERATION LIMITED<br/>使用限制</td>
+            </tr>
+            
+            <tr>
+                
+                <td height="60" align="center" class="modifid-property-materialsList" data-content-formattor="toolFormattor">
+                    {% if ifEquipment == 0 %}
+                    <span style="color:blue;">N/A</span>
+                    
+                    {% elif ifEquipment == 1 %}
+                    {% for materials in materialsList %}
+                    <span style="color:blue;">{{ materials.name }} </span><br>
+                    {% endfor %}
+                    {% else %}
+                    {# 语法需要 #}
+                    {% endif %}
+                </td>
+                
+                <td align="left" class="modifid-property-materialsList">
+                    {% if ifEquipment == 0 %}
+                    <span style="color:blue;">N/A</span>
+                    {% elif ifEquipment == 1 %}
+                    {% for materials in materialsList %}
+                    <span style="color:blue;">{{ materials.itemPnr }} </span><br>
+                    {% endfor %}
+                    {% else %}
+                    
+                    {# 语法需要没有内容 #}
+                    
+                    {% endif %}
+                </td>
+                
+                
+                <td colspan="2" align="left" style="padding-left: 10px;">
+                    <span style="color:blue;">
+                        FAILURE<br/>
+                        故障数量：<span class="modifid-property-defaultCount" style="border-bottom:1px solid black;">
+                            {% if defaultCount %}
+                            {{ defaultCount  }}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                            &nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                        DISPATCH<br/>
+                        放行数量：<span class="modifid-property-releaseCount" style="border-bottom:1px solid black;">
+                            
+                            {% if releaseCount %}
+                            {{ releaseCount }}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                            
+                            &nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                        INSTALLATION<br/>
+                        安装数量：<span class="modifid-property-installCount" style="border-bottom:1px solid black;">
+                            {% if installCount %}
+                            {{  installCount }}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                            &nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    </span>
+                </td>
+                <td colspan="2" align="center" class="modifid-property-ataChapter"><span style="color:blue;">{{ ataChapter }} </span></td>
+                
+                <td colspan="2" align="left" class="modifid-property-deferDefClassify ZZBLCLF"
+                    data-content-formattor="deferDefClassifyFormatter" style="padding-left: 10px;">
+                    <span>A</span>
+                    
+                    {% if zzblclf  ==  'A' %}
+                    <input type="checkbox" name="ZZBLCLF" value="A"   checked="checked">
+                        {% else %}
+                        <input type="checkbox" name="ZZBLCLF" value="A">
+                            {% endif %}
+                            
+                            <span>B</span>
+                            
+                            
+                            {% if zzblclf  ==  'B' %}
+                            <input type="checkbox" name="ZZBLCLF" value="B"   checked="checked">
+                                {% else %}
+                                <input type="checkbox" name="ZZBLCLF" value="B">
+                                    {% endif %}
+                                    
+                                    <span>C</span>
+                                    
+                                    {% if zzblclf  ==  'C' %}
+                                    <input type="checkbox" name="ZZBLCLF" value="C"   checked="checked">
+                                        {% else %}
+                                        <input type="checkbox" name="ZZBLCLF" value="C">
+                                            {% endif %}
+                                            <span>D</span>
+                                            
+                                            {% if zzblclf  ==  'D' %}
+                                            <input type="checkbox" name="ZZBLCLF" value="D"   checked="checked">
+                                                {% else %}
+                                                <input type="checkbox" name="ZZBLCLF" value="D">
+                                                    {% endif %}
+                                                    
+                                                    <span>I</span>
+                                                    
+                                                    {% if zzblclf  ==  'I' %}
+                                                    <input type="checkbox" name="ZZBLCLF" value="I"   checked="checked">
+                                                        {% else %}
+                                                        <input type="checkbox" name="ZZBLCLF" value="I">
+                                                            {% endif %}
+                                                            
+                                                            <span>M</span>
+                                                            
+                                                            
+                                                            {% if zzblclf  ==  'M' %}
+                                                            <input type="checkbox" name="ZZBLCLF" value="M"   checked="checked">
+                                                                {% else %}
+                                                                <input type="checkbox" name="ZZBLCLF" value="M">
+                                                                    {% endif %}
+                                                                    
+                                                                    <span>S</span>
+                                                                    
+                                                                    {% if zzblclf  ==  'S' %}
+                                                                    <input type="checkbox" name="ZZBLCLF" value="S"   checked="checked">
+                                                                        {% else %}
+                                                                        <input type="checkbox" name="ZZBLCLF" value="S">
+                                                                            {% endif %}
+                                                                            
+                                                                            <span>CBS-F</span>
+                                                                            
+                                                                            {% if zzblclf  ==  'CBS-F' %}
+                                                                            <input type="checkbox" name="ZZBLCLF" value="CBS-F"   checked="checked">
+                                                                                {% else %}
+                                                                                <input type="checkbox" name="ZZBLCLF" value="CBS-F">
+                                                                                    {% endif %}
+                                                                                    
+                                                                                    <span>CBS-C</span>
+                                                                                    
+                                                                                    
+                                                                                    {% if zzblclf  ==  'CBS-C' %}
+                                                                                    <input type="checkbox" name="ZZBLCLF" value="CBS-C"   checked="checked">
+                                                                                        {% else %}
+                                                                                        <input type="checkbox" name="ZZBLCLF" value="CBS-C">
+                                                                                            {% endif %}
+                                                                                            
+                                                                                            <span>CBS-Y</span>
+                                                                                            
+                                                                                            {% if zzblclf  ==  'CBS-Y' %}
+                                                                                            <input type="checkbox" name="ZZBLCLF" value="CBS-Y"   checked="checked">
+                                                                                                {% else %}
+                                                                                                <input type="checkbox" name="ZZBLCLF" value="CBS-Y">
+                                                                                                    {% endif %}
+                                                                                                    
+                                                                                                    <span>CBS-A</span>
+                                                                                                    
+                                                                                                    {% if zzblclf  ==  'CBS-A' %}
+                                                                                                    <input type="checkbox" name="ZZBLCLF" value="CBS-A"   checked="checked">
+                                                                                                        {% else %}
+                                                                                                        <input type="checkbox" name="ZZBLCLF" value="CBS-A">
+                                                                                                            {% endif %}
+                                                                                                            
+                                                                                                            <span>CBS-G</span>
+                                                                                                            
+                                                                                                            {% if zzblclf  ==  'CBS-G' %}
+                                                                                                            <input type="checkbox" name="ZZBLCLF" value="CBS-G"   checked="checked">
+                                                                                                                {% else %}
+                                                                                                                <input type="checkbox" name="ZZBLCLF" value="CBS-G">
+                                                                                                                    {% endif %}
+                                                                                                                    
+                                                                                                                    <span>CBL</span>
+                                                                                                                    
+                                                                                                                    
+                                                                                                                    {% if zzblclf  ==  'CBL' %}
+                                                                                                                    <input type="checkbox" name="ZZBLCLF" value="CBL"   checked="checked">
+                                                                                                                        {% else %}
+                                                                                                                        <input type="checkbox" name="ZZBLCLF" value="CBL">
+                                                                                                                            {% endif %}
+                                                                                                                            
+                                                                                                                            <span>CBO</span>
+                                                                                                                            
+                                                                                                                            {% if zzblclf  ==  'CBO' %}
+                                                                                                                            <input type="checkbox" name="ZZBLCLF" value="CBO"   checked="checked">
+                                                                                                                                {% else %}
+                                                                                                                                <input type="checkbox" name="ZZBLCLF" value="CBO">
+                                                                                                                                    {% endif %}
+                                                                                                                                    </td>
+                <td align="center" class="modifid-property-serviceEffect"
+                    data-content-formattor="serviceEffectFormattor">
+                    <span style="margin-right:3px;font-size: 12px;">
+                        SERVERE<br/>
+                        严&nbsp;&nbsp;&nbsp;&nbsp;重
+                    </span>
+                    {% if serviceEffect  ==  2 %}
+                    <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                        disabled="disabled" checked="checked" id="serviceEffect_serious"
+                        name="serviceEffect" value="2">
+                        {% else %}
+                        <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                            disabled="disabled" id="serviceEffect_serious"
+                            name="serviceEffect" value="2">
+                            {% endif %}
+                            
+                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            
+                            <br>
+                            <span style="margin-right:3px;font-size: 12px;">
+                                COMMON<br/>
+                                一&nbsp;&nbsp;&nbsp;&nbsp;般
+                            </span>
+                            {% if serviceEffect  ==  1 %}
+                            <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                                disabled="disabled" checked="checked" id="serviceEffect_common"
+                                name="serviceEffect" value="1">
+                                {% else %}
+                                <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                                    disabled="disabled" id="serviceEffect_common"
+                                    name="serviceEffect" value="1">
+                                    {% endif %}
+                                    
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    
+                                    <br>
+                                    <span style="margin-right:3px;font-size: 12px;">
+                                        NO<br/>
+                                        不影响
+                                    </span>
+                                    {% if serviceEffect  ==  0 %}
+                                    <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                                        disabled="disabled" checked="checked" id="serviceEffect_nofeel"
+                                        name="serviceEffect" value="0">
+                                        {% else %}
+                                        <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox"
+                                            disabled="disabled" id="serviceEffect_common"
+                                            name="serviceEffect" value="0">
+                                            {% endif %}
+                                            
+                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                            <br>
+                                            </td>
+                <td align="center"  class="modifid-property-olList"
+                    data-content-formattor="olListFormattor">
+                    <span style="margin-right:3px;font-size: 12px;">
+                        O ITEM<br/>
+                        O项
+                    </span>
+                    
+                    {% if ZZFLGO  ==  'X' %}
+                    <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" type="checkbox" disabled="disabled" name="ZZFLGO"
+                        checked="checked" value="X">
+                        {% else %}
+                        <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" type="checkbox" disabled="disabled" name="ZZFLGO"
+                            value="X">
+                            {% endif %}
+                            
+                            <br>
+                            <span style="border-bottom:1px solid black;min-width: 25px;display: inline-block;" class="modifid-property-operationLimitedOther">
+                                {{ operationLimitedOther }}  &nbsp;
+                            </span>
+                            </td>
+            </tr>
+            <!-- 85 end -->
+            
+            <!-- 361 start -->
+            <tr>
+                <td align="center">REASON CODE<br>保留原因代码</td>
+                <td colspan="2" align="center">TARGET DATE/FH/CYC<br/>计划保留时间/飞行小时/循环</td>
+                <td colspan="2" align="center">REQUIRED GRND TIME<br>所需停场时间</td>
+                <td colspan="2" align="center">MH REQUIRED<br>所需工时</td>
+                <td colspan="2" align="center">REQUIRED M<br/>是否有M项要求</td>
+                <td align="center">DD PLANNER<br/>执管单位DD计划员</td>
+            </tr>
+            <tr>
+                <td height="30" align="center" class="modifid-property-reasonCode">
+                    <span style="color:blue;">{{ reasonCode }} </span>
+                </td>
+                <td colspan="2" align="center">
+                    {% if deferredRemark %}
+                    <span style="color:blue;min-width: 25px;display: inline-block;"
+                        class="modifid-property-deferredRemark" >&nbsp;{{ deferredRemark }} </span>
+                    {% else %}
+                    <span style="color:blue;min-width: 25px;display: inline-block;"
+                        class="modifid-property-targetDate" data-content-formattor="targetDateFormattor">
+                        {% if targetDate %}
+                        {% if issueDate %}
+                        {{ deferredDaysStr }}
+                        {% else %}
+                        {{ targetDate }} 天
+                        {% endif %}
+                        {% endif %}
+                        
+                    </span><br>
+                    
+                    <span style="color:blue;min-width: 25px;display: inline-block;"
+                        class="modifid-property-deferredFlyHours" >
+                        {% if deferredFlyHours %}
+                        {{ deferredFlyHours }} 飞行小时
+                        {% endif %}
+                        
+                    </span><br>
+                    
+                    <span style="color:blue;min-width: 25px;display: inline-block;"
+                        class="modifid-property-deferredFlyCircles" >
+                        {{ deferredFlyCircles }} 循环
+                    </span>
+                    &nbsp;—&nbsp;
+                    
+                    <span style="color:blue;min-width: 25px;display: inline-block;"
+                        class="modifid-property-deferredFlyCirclesEnd" >
+                        {{ deferredFlyCirclesEnd }} 循环
+                    </span>
+                    {% endif %}
+                </td>
+                <td colspan="2" align="center" class="modifid-property-requiredGrndTime" ><span style="color:blue;">{{ requiredGrndTime }} </span></td>
+                <td colspan="2" align="center" class="modifid-property-mhRequired"><span style="color:blue;">{{ mhRequired }} </span></td>
+                <td colspan="2" align="center"  class="modifid-property-isRequiredM"
+                    data-content-formattor="isRequiredMFormattor" >
+                    <span style="margin-right:3px;font-size: 12px;">
+                        YES<br>
+                        是
+                    </span>
+                    {% if isRequiredM  ==  1 %}
+                    <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                        checked="checked" name="isRequiredM" value="1">
+                        {% else %}
+                        <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                            name="isRequiredM" value="1">
+                            {% endif %}
+                            
+                            <br>
+                            <span style="margin-right:3px;font-size: 12px;">
+                                NO<br>
+                                否
+                            </span>
+                            {% if isRequiredM != 1 %}
+                            <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                                checked="checked" name="isRequiredM" value="1">
+                                {% else %}
+                                <input style="height:13px;width:13px;margin-bottom:3px;" type="checkbox" disabled="disabled"
+                                    name="isRequiredM" value="0">
+                                    {% endif %}
+                                    </td>
+                <td align="center">
+                    <span style="color:blue;">
+                    </span>
+                </td>
+            </tr>
+            <!-- 361 end -->
+            
+            <!-- last part -->
+            <tr>
+                <td height="25" colspan="5" align="center" class="modifid-property-acList"
+                    data-content-formattor="acListFormattor" >RECTIFICATION/NAME/DATE  处理结果/人员/日期</td>
+                <td colspan="5"  align="left"></td>
+            </tr>
+            
+            {% if mechanic or mechanicDateStr %}
+            <tr>
+                <td colspan="10" height="25" style="color:blue;">
+                    &nbsp;{{ mechanic }} /{{ mechanicDateStr }}
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td colspan="5" style="border-right:none;">MCC TEL 执管单位MCC联系电话：</td>
+                <td colspan="5" style="border-left:none;">MCC FAX  执管单位MCC传真：</td>
+            </tr>
+            <!-- last end-->
+        </table>
+        
+    </div>
+    <table style="">
+        <tr>
+            <td>Form No.: ESFM-QS-003 </td>
+        </tr>
+    </table>
+    
+</div>

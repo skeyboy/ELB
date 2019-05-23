@@ -1,0 +1,479 @@
+{#airMinsInService
+blockMinsInService airMinsInServiceTotal
+blockMinsInServiceTotal  #}
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+	飞行记录本查看
+</title>
+<style type="text/css">
+	html {
+		-webkit-text-size-adjust: none;
+	}
+	table{
+		font-size: 10px;
+		font-weight:500;
+	}
+	table td{
+		font-size: 10px;
+		font-weight:500;
+		text-align: center;
+		height : 30px;
+		min-height : 30px;
+		border: 1px solid black;
+	}
+	table td.input-content {
+		color: blue;
+		border-color: black;
+		padding-left: 3px;
+		text-align: left;
+		word-break: break-all;
+
+	}
+
+	table td.history-content {
+		background-color: #ec971f;
+	}
+
+	.oneLineDiv {
+		/*width:99%;*/
+		/*margin-left: 0.5%;margin-right: 0.5%;*/
+	}
+	#oilDiv table {
+		width:100%;margin-top: 3px;line-height: 1;font-size: 10px;border:none;
+	}
+	#oilDiv table td{
+		border: 1px solid black;
+	}
+
+
+	table.faultReportTable tr{
+		height:5px;
+	}
+
+	body {
+		background-color: #fff;
+	}
+
+	.floatBottom {
+		margin-top:18px;
+	}
+
+	.col-w-1 {
+		width:1.49253731343284%;
+	}
+
+	.col-w-2 {
+		width:2.98507462686567%;
+	}
+
+	span.cnt{
+		color:blue;
+	}
+
+	[v-cloak]{
+		display: none;
+	}
+	.white-font{color: white;font-size: 5px;}
+
+</style>
+{% include "appOrder.html" %}
+</head>
+<body>
+
+<div id="flbContentDivId">
+<div class="oneLineDiv clearfix">
+	<div class="col-16-3" style="text-align:center;">
+		<img src="static/adp/images/maintenancemgt/ac_logo.jpg" style="width:40px;height:47px;"/>
+	</div>
+	<div class="col-16-10" style="padding-top: 18px;">
+		<strong >FLIGHTLOG 飞行记录本</strong>
+	</div>
+    <div class="col-l6-3" style="padding-top: 18px;"><strong >NO.FL </strong><span class="cnt"> {{identifier}}</span></div>
+
+</div>
+<div   class="oneLineDiv clearfix" style="border: 2px solid black;">
+	<table class="" style="width:100%"  >
+		<tr>
+			<td colspan="5">A/C REG NO.</td>
+			<td colspan="6"><span class="cnt"> {{aircraftNo}}</span></td>
+			<td colspan="8">A/C TYPE</td>
+			<td colspan="17"><span class="cnt"> {{aircraftType}}</span></td>
+			<td colspan="4" rowspan="4">PAX<BR>TOTAL<BR>NO.</td>
+			<td colspan="25">ALL WEIGHTS IN KILOGRAM</td>
+
+		</tr>
+		<tr>
+			<td colspan="5">DATE OF<BR>ORIGN</td>
+			<td colspan="6"><span class="cnt"> {{flightInfoDay}}</span></td>
+			<td colspan="8">DEPARTURE UTC</td>
+			<td colspan="8">ARRIVAL  UTC</td>
+			<td colspan="9">A/C TIME IN SERVICE</td>
+			<td colspan="10" ></td>
+			<td colspan="15" ></td>
+
+		</tr>
+		<tr>
+			<td colspan="5" style="background-color: grey;"></td>
+			<td colspan="6" ><div class="floatBottom" >LEG</div></td>
+			<td colspan="4" ><div class="floatBottom" >BLOCK</div></td>
+			<td colspan="4" ><div class="floatBottom" >TAKE OFF</div></td>
+			<td colspan="4" ><div class="floatBottom" >LANDING</div></td>
+			<td colspan="4" ><div class="floatBottom" >BLOCK</div></td>
+			<td colspan="4" ><div class="floatBottom" >AIR</div></td>
+			<td colspan="1"></td>
+			<td colspan="4" ><div class="floatBottom" >BLOCK</div></td>
+
+			<td colspan="5" rowspan="2">TOTAL<BR>TRAFFIC<BR>WEIGHT</td>
+			<td colspan="5" rowspan="2">TOTAL<BR>TAKE OFF<BR>WEIGHT</td>
+			<td colspan="5" rowspan="2">REMAINING<BR>FUEL</td>
+			<td colspan="5" rowspan="2">FUEL<BR>ADDED</td>
+			<td colspan="5" rowspan="2">TOTAL FUEL<BR>ON BOARD</td>
+
+
+		</tr>
+		<tr>
+			<td colspan="1" >LEG<br>NO.</td>
+			<td colspan="4" ><div class="floatBottom" >FLIGHT NO</div></td>
+			<td colspan="3" ><div class="floatBottom" >FROM</div></td>
+			<td colspan="3" ><div class="floatBottom" >TO</div></td>
+
+
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+			<td colspan="1" ><div class="floatBottom" >LD<BR>GS</div></td>
+			<td colspan="2" ><div class="floatBottom" >HRS</div></td>
+			<td colspan="2" ><div class="floatBottom" >MIN</div></td>
+		</tr>
+		{% for flb in flbList %}
+			<tr>
+				<td colspan="1" class="col-w-2" >{{ forloop.counter }}</td>
+				<!--flightNo-->
+				{% for flightNo in flb.flightNoArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ flightNo }}</span>
+					</td>
+				{% endfor %}
+
+				<!--dep-->
+				{% for dep in flb.depArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ dep }}</span>
+					</td>
+				{% endfor %}
+
+				<!--arr-->
+				{% for arr in flb.arrArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ arr }}</span>
+					</td>
+				{% endfor %}
+
+				<!--offBlockTime-->
+				{% for offBlockTime in flb.offBlockTimeArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ offBlockTime }}</span>
+					</td>
+				{% endfor %}
+
+				<!--offTime-->
+				{% for offTime in flb.offTimeArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ offTime }}</span>
+					</td>
+				{% endfor %}
+
+				<!--onnTime-->
+				{% for onnTime in flb.onnTimeArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ onnTime }}</span>
+					</td>
+				{% endfor %}
+
+
+				<!--onBlockTime-->
+				{% for onBlockTime in flb.onBlockTimeArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ onBlockTime }}</span>
+					</td>
+				{% endfor %}
+
+				<!--airMinsInService-->
+				{% for airMinsInService in flb.airMinsInServiceArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ airMinsInService }}</span>
+					</td>
+				{% endfor %}
+
+				<!-- ldgs -->
+				<td colspan="1" class="col-w-1">
+					<span class="cnt">{{flb.ldgs}}</span>
+				</td>
+
+				<!--blockMinsInService-->
+				{% for blockMinsInService in flb.blockMinsInServiceArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ blockMinsInService }}</span>
+					</td>
+				{% endfor %}
+
+				<!--paxTotalNo-->
+				{% for paxTotalNo in flb.paxTotalNoArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ paxTotalNo }}</span>
+					</td>
+				{% endfor %}
+
+				<!--totalTrafficWeight-->
+				{% for totalTrafficWeight in flb.totalTrafficWeightArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ totalTrafficWeight }}</span>
+					</td>
+				{% endfor %}
+
+				<!--totalTakeOffWeight-->
+				{% for totalTakeOffWeight in flb.totalTakeOffWeightArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ totalTakeOffWeight }}</span>
+					</td>
+				{% endfor %}
+
+				<!--remainingFuel-->
+				{% for remainingFuel in flb.remainingFuelArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ remainingFuel }}</span>
+					</td>
+				{% endfor %}
+
+				<!--fuelAdded-->
+				{% for fuelAdded in flb.fuelAddedArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ fuelAdded }}</span>
+					</td>
+				{% endfor %}
+
+				<!--totalFuelOnBoard-->
+				{% for totalFuelOnBoard in flb.totalFuelOnBoardArr %}
+					<td colspan="1" class="col-w-1">
+						<span class="cnt">{{ totalFuelOnBoard }}</span>
+					</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+
+		<tr>
+			<td colspan="27" ><strong class="pull-right">&rarr;</strong>
+				<strong class="pull-right">A/C TIME IN SERVICE TOTAL LOG AIR TIME/LANDINGS</strong>	</td>
+
+            <!-- airMinsInServiceTotal -->
+			{% for airMinsInServiceTotal in airMinsInServiceTotalArr %}
+				<td colspan="1" class="col-w-1">
+					<span class="cnt">{{ airMinsInServiceTotal }}</span>
+				</td>
+			{% endfor %}
+
+            <!-- ldgsTotal -->
+            <td colspan="1" class="col-w-1">
+                <span class="cnt">{{ldgsTotal}}</span>
+            </td>
+
+			<!-- blockMinsInServiceTotal -->
+			{% for blockMinsInServiceTotal in blockMinsInServiceTotalArr %}
+				<td colspan="1" class="col-w-1">
+					<span class="cnt">{{ blockMinsInServiceTotal }}</span>
+				</td>
+			{% endfor %}
+			<td colspan="31" >	&larr;  TOTAL LOG BLOCK TIME</td>
+		</tr>
+
+	</table>
+</div>
+
+<br>
+<!--  -->
+<div  class="oneLineDiv clearfix" style="border: 2px solid black;">
+	<div style="width: 30%;float: left;">
+		<table class="" style="width:100%" border="1" >
+			<tr>
+				<td style="width:20%;">TITLE</td>
+				<td style="width:45%;">NAME OF CREW MEMBER</td>
+				<td style="width:30%;" colspan="6">ID  NO. </td>
+				<td style="width:5%;">LEGS</td>
+			</tr>
+			{% for crew in crewList %}
+				{% if forloop.counter0 < 12 %}
+					<tr>
+						<td>
+							<span class="cnt">{{crew.title}}</span>
+						</td>
+						<td>
+							<span class="cnt">{{crew.memberName}}</span>
+						</td>
+						{% for memberIdNo in crew.memberIdNoArr %}
+							<td style="width:5%;">
+									<span class="cnt">{{memberIdNo}}</span>
+								</td>
+						{% endfor %}
+						<td>
+							<span class="cnt">{{crew.legs}}</span>
+						</td>
+					</tr>
+				{% endif %}
+			{% empty %}
+				{% for i in 12 %}
+					<tr>
+						<td>
+							<span class="cnt"> </span>
+						</td>
+						<td>
+							<span class="cnt"> </span>
+						</td>
+						{% for i in 6 %}
+							<td style="width:5%;">
+								<span class="cnt"> </span>
+							</td>
+						{% endfor %}
+						<td>
+							<span class="cnt"> </span>
+						</td>
+					</tr>
+				{% endfor %}
+			{% endfor %}
+		</table>
+	</div>
+	<div style="width: 1%;float: left;">&nbsp;</div>
+
+	<div style="width: 30%;float: left;">
+		<table class="" style="width:100%" border="1" >
+			<tr>
+				<td style="width:20%;">TITLE</td>
+				<td style="width:45%;">NAME OF CREW MEMBER</td>
+				<td style="width:30%;" colspan="6">ID  NO. </td>
+				<td style="width:5%;">LEGS</td>
+			</tr>
+			{% for crew in crewList %}
+				{% if forloop.counter0 > 11 %}
+					<tr>
+						<td>
+							<span class="cnt">{{crew.title}}</span>
+						</td>
+						<td>
+							<span class="cnt">{{crew.memberName}}</span>
+						</td>
+						{% for memberIdNo in crew.memberIdNoArr %}
+							<td style="width:5%;">
+									<span class="cnt">{{memberIdNo}}</span>
+								</td>
+						{% endfor %}
+						<td>
+							<span class="cnt">{{crew.legs}}</span>
+						</td>
+					</tr>
+				{% endif %}
+			{% empty %}
+				{% for i in 12 %}
+					<tr>
+						<td>
+							<span class="cnt"> </span>
+						</td>
+						<td>
+							<span class="cnt"> </span>
+						</td>
+						{% for i in 6 %}
+							<td style="width:5%;">
+								<span class="cnt"> </span>
+							</td>
+						{% endfor %}
+						<td>
+							<span class="cnt"> </span>
+						</td>
+					</tr>
+				{% endfor %}
+
+			{% endfor %}
+
+		</table>
+	</div>
+	<div style="width: 1%;float: left;">&nbsp;</div>
+	<div style="width: 38%;float: left;" class="clearfix">
+		<div class="clearfix" style="width:100%;height: 30%;" >
+			<table  style="float: left;margin-left: 8px;width: 20%;">
+				<tr><td colspan="6">FUEL DUMPED</td></tr>
+				<tr><td colspan="6"><span class="cnt">{{fuelDumped}}</span></td></tr>
+			</table>
+			<table style="float: right;margin-left: 5px;width: 70%;" >
+				<tr><td colspan="2">FLIGHT TRAINING ONLY </td></tr>
+				<tr>
+					<td style="width: 50%">NO.OF TOUCH AND GOES</td>
+					<td><span class="cnt"> {{noOfTouchAndGoes}}</span></td>
+				</tr>
+				<tr>
+					<td>NO.OF FULL STOPS</td>
+					<td><span class="cnt"> {{noOfFullStops}}</span></td>
+				</tr>
+			</table>
+		</div>
+		<div class="clearfix" style="width: 98%;height: 60%;min-height: 60%;margin: 8px;">
+			<textarea readonly style="border: none;width: 100%;height: 225px;color: blue;"> {{remarks}}</textarea>
+
+		</div>
+		<div class="clearfix" style="width: 100%;">
+			<div style="width: 65%;border-bottom: 1px solid black; text-align: center" class="center-block">
+				{% if signaturePilotCommand %}
+					<img class="pic" style="width: 20%" src="data:image/png;base64,{{signaturePilotCommand}}">
+				{% endif %}
+				<span class="white-font">signaturePilotCommand</span>
+			</div>
+			<div style="width: 65%; text-align: center;" class="center-block">SIGNATURE OF PILOT IN COMMAND</div>
+
+		</div>
+	</div>
+
+</div>
+
+<!-- 工单去处说明 -->
+<div  class="oneLineDiv clearfix" style="margin-top: 5px;">
+	<div class="col-16-1">&nbsp;</div>
+	<div class="col-16-5">
+		<div>ORIGNAL-WHITE-REMAIN IN FLIGHT LOG.</div>
+		<div>原页（白色）保留在记录本内</div>
+	</div>
+	<div class="col-16-10">
+		<div>1.COPY-PINK-MAINTENANCE PPC</div>
+		<div>第一份副页（粉色）送维修单位PPC</div>
+	</div>
+</div>
+
+</div>
+
+<div id="showHistoryModal" class="modal bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" style="width: 100%;" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+
+			</div>
+
+			<div class="modal-footer" style="text-align: center;">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<textarea id="flbPageDetailJsonStr" style="display: none;">{{flbPageDetailJsonStr}}</textarea>
+<script type="text/javascript">
+	$(function(){
+        $("table :input:visible").attr('readonly',true);
+	});
+</script>
+</body>
+</html>

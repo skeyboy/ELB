@@ -244,7 +244,7 @@
                         </div>
                         <div class="col-16-8">
                             {% if tlb1.captSignVo.signPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb1.captSignVo.signPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" src="{{tlb1.captSignVo.signPictureBase64}}">
                                 {% endif %}
                                 </div>
                     </td>
@@ -256,7 +256,7 @@
                         </div>
                         <div class="col-16-8">
                             {% if tlb2.captSignVo.signPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb2.captSignVo.signPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" src="{{tlb2.captSignVo.signPictureBase64}}">
                                 {% endif %}
                                 </div>
                     </td>
@@ -268,7 +268,7 @@
                         </div>
                         <div class="col-16-8">
                             {% if tlb3.captSignVo.signPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb3.captSignVo.signPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" src="{{tlb3.captSignVo.signPictureBase64}}">
                                 {% endif %}
                                 </div>
                     </td>
@@ -320,7 +320,7 @@
                                 <div>
                                     <div class="">
                                         <img style="height:35px;float: left;" class="center-block"
-                                             src="data:image/png;base64,{{tcfrv.modifyItemSign.signPictureBase64}}"/>
+                                             src="{{tcfrv.modifyItemSign.signPictureBase64}}"/>
                                     </div>
                                 </div>
                             {% elif tcfrv.modifyItemSign == 3 %}
@@ -330,7 +330,7 @@
                                     </div>
                                     <div class="col-16-8">
                                         <img style="height: 35px" class="center-block"
-                                             src="data:image/png;base64,{{tcfrv.modifyItemSign.signPictureBase64}}"/>
+                                             src="{{tcfrv.modifyItemSign.signPictureBase64}}"/>
                                     </div>
                                 </div>
                                 <div class="col-16-8">
@@ -814,7 +814,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil1.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil1.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil1.oilRefEngItemSign.signType == 3 %}
@@ -823,7 +823,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil1.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil1.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -838,7 +838,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil1.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil1.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil1.oilRefEng2ItemSign.signType == 3 %}
@@ -847,7 +847,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil1.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil1.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -892,7 +892,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_apu1.apuItemSign.signPictureBase64}}"/>
+            src="{{tlb_apu1.apuItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_apu1.apuItemSign.signType == 3 %}
@@ -901,7 +901,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_apu1.apuItemSign.signPictureBase64}}"/>
+            src="{{tlb_apu1.apuItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -993,7 +993,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil2.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil2.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil2.oilRefEngItemSign.signType == 3 %}
@@ -1002,7 +1002,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil2.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil2.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -1017,7 +1017,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil2.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil2.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil2.oilRefEng2ItemSign.signType == 3 %}
@@ -1026,7 +1026,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil2.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil2.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -1071,7 +1071,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_apu2.apuItemSign.signPictureBase64}}"/>
+            src="{{tlb_apu2.apuItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_apu2.apuItemSign.signType == 3 %}
@@ -1080,7 +1080,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_apu2.apuItemSign.signPictureBase64}}"/>
+            src="{{tlb_apu2.apuItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -1173,7 +1173,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil3.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil3.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil3.oilRefEngItemSign.signType == 3 %}
@@ -1182,7 +1182,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil3.oilRefEngItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil3.oilRefEngItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -1197,7 +1197,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil3.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil3.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_oil3.oilRefEng2ItemSign.signType == 3 %}
@@ -1206,7 +1206,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_oil3.oilRefEng2ItemSign.signPictureBase64}}"/>
+            src="{{tlb_oil3.oilRefEng2ItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}
@@ -1254,7 +1254,7 @@
             <div>
             <div class="">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_hydr.hydrItemSign.signPictureBase64}}"/>
+            src="{{tlb_hydr.hydrItemSign.signPictureBase64}}"/>
             </div>
             </div>
             {% elif tlb_hydr.hydrItemSign.signType == 3 %}
@@ -1263,7 +1263,7 @@
             </div>
             <div class="col-16-8">
             <img style="" class="center-block img-responsive"
-            src="data:image/png;base64,{{tlb_hydr.hydrItemSign.signPictureBase64}}"/>
+            src="{{tlb_hydr.hydrItemSign.signPictureBase64}}"/>
             </div>
             {% endif %}
             {% endif %}

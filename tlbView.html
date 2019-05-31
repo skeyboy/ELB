@@ -143,12 +143,12 @@
                             {% endif %}
                             
                             {% if tlb1.releaseSignPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb1.releaseSignPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" onerror="this.style.display='none'" src="{{tlb1.releaseSignPictureBase64}}">
                                 {% endif %}
                                 </div>
                         {% if tlb1.isReleaseCancelled == 1 %}
                         <div class="release-cancel">
-                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" width="100%;" height="100%">
+                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" onerror="this.style.display='none'" width="100%;" height="100%">
                                 </div>
                         {% endif %}
                     </td>
@@ -165,12 +165,12 @@
                             {% endif %}
                             
                             {% if tlb2.releaseSignPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb2.releaseSignPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" onerror="this.style.display='none'" src="{{tlb2.releaseSignPictureBase64}}">
                                 {% endif %}
                                 </div>
                         {% if tlb2.isReleaseCancelled == 1 %}
                         <div class="release-cancel">
-                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" width="100%;" height="100%">
+                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" onerror="this.style.display='none'" width="100%;" height="100%">
                                 </div>
                         {% endif %}
                     </td>
@@ -187,12 +187,12 @@
                             {% endif %}
                             
                             {% if tlb3.releaseSignPictureBase64 %}
-                            <img style="height: 35px;max-width: 68px;" src="data:image/png;base64,{{tlb3.releaseSignPictureBase64}}">
+                            <img style="height: 35px;max-width: 68px;" onerror="this.style.display='none'" src="{{tlb3.releaseSignPictureBase64}}">
                                 {% endif %}
                                 </div>
                         {% if tlb3.isReleaseCancelled == 1 %}
                         <div class="release-cancel">
-                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" width="100%;" height="100%">
+                            <img src="static/adp/images/maintenancemgt/release-cancelled.png" onerror="this.style.display='none'" width="100%;" height="100%">
                                 </div>
                         {% endif %}
                     </td>
@@ -279,7 +279,7 @@
                         <div class="col-16-4">
                             {% if tlb4.releaseSignPictureBase64 %}
                             {{tlb4.releaseSign}}
-                            <img style="height: 25px; max-width: 68px;" src="data:image/png;base64,{{tlb4.releaseSignPictureBase64}}">
+                            <img style="height: 25px; max-width: 68px;" onerror="this.style.display='none'" src="{{tlb4.releaseSignPictureBase64}}">
                                 {% endif %}
                                 </div>
                     </td>

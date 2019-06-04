@@ -103,7 +103,7 @@
 					<div>
 						<div class="">
 							<img style="height:35px;float: left;" class="center-block"
-								 src="data:image/png;base64,{{tcfrv.modifyItemSign.signPictureBase64}}"/>
+								 src="{{tcfrv.modifyItemSign.signPictureBase64}}"/>
 						</div>
 					</div>
 					{% elif tcfrv.modifyItemSign == 3 %}
@@ -113,7 +113,7 @@
 						</div>
 						<div class="col-16-8">
 							<img style="height: 35px" class="center-block"
-								 src="data:image/png;base64,{{tcfrv.modifyItemSign.signPictureBase64}}"/>
+								 src="{{tcfrv.modifyItemSign.signPictureBase64}}"/>
 						</div>
 					</div>
 					<div class="col-16-8">
@@ -274,14 +274,14 @@
 				{{itemSign.employeeName}}
 				{% elif itemSign.signType == 2 %}
 				<img style="height:35px;float: left;max-width: 80px" class="center-block"
-					 src="data:image/png;base64,{{itemSign.signPictureBase64}}"/>
+					 src="{{itemSign.signPictureBase64}}"/>
 				{% elif itemSign.signType == 3 %}
 					<div class="col-16-8">
 						{{itemSign.employeeNo}}
 					</div>
 					<div class="col-16-8">
 						<img style="height:35px;max-width: 80px" class="center-block"
-							 src="data:image/png;base64,{{itemSign.signPictureBase64}}"/>
+							 src="{{itemSign.signPictureBase64}}"/>
 					</div>
 				{% endif %}
 			{% endfor %}
@@ -301,7 +301,7 @@
 				</div>
 				<div class="col-16-8">
 					<img class="center-block" style="height:35px; max-width: 88px;"
-						 src="data:image/png;base64,{{tcfrv.clbSign.signPictureBase64}}"/>
+						 src="{{tcfrv.clbSign.signPictureBase64}}"/>
 				</div>
 			{% endif %}
 		</td>
